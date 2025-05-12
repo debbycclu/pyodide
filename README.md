@@ -29,4 +29,4 @@ http://localhost:8000
 ## Acknowledgments
 
 - [Pyodide](https://pyodide.org/) - The Python distribution for the browser
-- [Towards Data Science](https://towardsdatascience.com/) - Original tutorial source
+- [Towards Data Science](https://towardsdatascience.com/running-python-programs-in-your-browser/) - Original tutorial source
