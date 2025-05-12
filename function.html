@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Call Python from JavaScript</title>
+</head>
+<body>
+  <h1>Calculate the Factorial of a Number</h1>
+  <input type="number" id="numberInput" placeholder="Enter a number" />
+  <button id="calcFactorial">Calculate Factorial</button>
+  <pre id="result"></pre>
+
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+  <script>
+    let pyodideReadyPromise = loadPyodide();
+
+    async function calculateFactorial() {
+      const pyodide = await pyodideReadyPromise;
+      // Define a Python function for calculating factorial
+      await pyodide.runPythonAsync(`
+        def factorial(n):
+            if n == 0:
+                return 1
+            else:
+                return n * factorial(n - 1)
+      `);
+      // Get the input value from the HTML form
+      const n = Number(document.getElementById('numberInput').value);
+      // Call the Python factorial function
+      let result = pyodide.globals.get("factorial")(n);
+      document.getElementById('result').textContent = `Factorial of ${n} is ${result}`;
+    }
+    
+    document.getElementById('calcFactorial').addEventListener('click', calculateFactorial);
+  </script>
+</body>
+</html>

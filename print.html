@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pyodide Example</title>
+</head>
+<body>
+  <h1>Running Python in the Browser with Pyodide</h1>
+  <button id="runPython">Run Python Code</button>
+  <pre id="output"></pre>
+
+  <!-- Load Pyodide from the CDN -->
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+  <script>
+    async function main() {
+      // Load Pyodide
+      const pyodide = await loadPyodide();
+      document.getElementById('runPython').addEventListener('click', async () => {
+        // Run a simple Python command
+        let result = await pyodide.runPythonAsync(`
+          import math
+          math.sqrt(16)
+        `);
+        document.getElementById('output').textContent = 'Square root of 16 is: ' + result;
+      });
+    }
+    main();
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyodide Sales Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        h1 { color: #333; }
+        input { margin: 10px; }
+        select, button { padding: 10px; font-size: 16px; margin: 5px; }
+        img { max-width: 100%; display: block; margin: 20px auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+
+        th { background-color: #f4f4f4; }
+  .sortable th {
+   cursor: pointer;
+   user-select: none;
+  }
+  .sortable th:hover {
+   background-color: #e0e0e0;
+  }
+    </style>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+</head>
+<body>
+
+    <h1>📊 Pyodide Sales Dashboard</h1>
+
+    <input type="file" id="csvUpload" accept=".csv">
+    
+    <label for="metricSelect">Select Sales Metric:</label>
+    <select id="metricSelect">
+        <option value="total_sales">Total Sales</option>
+        <option value="category_sales">Sales by Category</option>
+        <option value="region_sales">Sales by Region</option>
+        <option value="monthly_trends">Monthly Trends</option>
+    </select>
+
+    <br><br>
+    <button id="analyzeData">Analyze Data</button>
+
+    <h2>📈 Sales Data Visualization</h2>
+    <img id="chartImage" alt="Generated Chart" style="display: none">
+    <h2>📊 Sales Data Table</h2>
+    <div id="tableOutput"></div>
+
+    <script src="main.js"></script>
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NumPy in the Browser</title>
+</head>
+<body>
+  <h1>Matrix Multiplication with NumPy</h1>
+  <button id="runNumPy">Run NumPy Code</button>
+  <pre id="numpyResult"></pre>
+
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+  <script>
+    async function runNumPyCode() {
+      // Load the Pyodide interpreter
+      const pyodide = await loadPyodide();
+      
+      // Load the NumPy package before using it
+      await pyodide.loadPackage("numpy");
+      
+      // Run Python code to perform a matrix multiplication
+      let result = await pyodide.runPythonAsync(`
+        import numpy as np
+        A = np.array([[1, 2], [3, 4]])
+        B = np.array([[2, 0], [1, 2]])
+        C = np.matmul(A, B)
+        C.tolist()  # Convert the numpy array to a Python list for display
+      `);
+      
+      // Convert the Python result (PyProxy) to a native JavaScript object
+      // so it displays properly
+      document.getElementById('numpyResult').textContent =
+        'Matrix Multiplication Result: ' + JSON.stringify(result.toJs());
+    }
+    
+    // Set up the event listener for the button
+    document.getElementById('runNumPy').addEventListener('click', runNumPyCode);
+  </script>
+</body>
+</html>
